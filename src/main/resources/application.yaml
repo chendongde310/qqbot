@@ -1,0 +1,4 @@
+bot:
+  websocketUrl: 127.0.0.1 #go-cqhttp配置中的正向websocket地址
+  websocketPort: 5701 #go-cqhttp配置中的正向websocket端口号
+  accessToken:   #go-cqhttp配置中的access_token
