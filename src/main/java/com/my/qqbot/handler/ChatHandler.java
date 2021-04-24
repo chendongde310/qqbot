@@ -14,7 +14,7 @@ public class ChatHandler {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        try (Response response = HttpHandler.client.newCall(request).execute()) {
+        try (Response response = HttpHandler.Handler().client.newCall(request).execute()) {
             JSONObject jsonObject = JSONObject.parseObject(response.body().string());
             return jsonObject.getJSONObject("data").getString("answer");
         } catch (IOException e) {

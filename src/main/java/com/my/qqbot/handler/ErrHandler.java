@@ -13,7 +13,7 @@ public class ErrHandler {
         Request request = new Request.Builder()
               //  .url(BaseUrl + "app/getRandom")
                 .build();
-        try (Response response = HttpHandler.client.newCall(request).execute()) {
+        try (Response response = HttpHandler.Handler().client.newCall(request).execute()) {
             JSONObject jsonObject = JSONObject.parseObject(response.body().string());
             return jsonObject.getJSONObject("data").getString("text");
         }

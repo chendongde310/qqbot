@@ -7,13 +7,19 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class HttpHandler {
+    private static HttpHandler httpHandler;
+    public  OkHttpClient client ;
 
-  public  static   OkHttpClient client = new OkHttpClient();
+    public static HttpHandler Handler() {
+        if (httpHandler == null) {
+            httpHandler = new HttpHandler();
+        }
+
+        return httpHandler;
+    }
 
 
-
-
-
-
-
+    private HttpHandler( ) {
+        this.client = new OkHttpClient();
+    }
 }

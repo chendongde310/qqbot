@@ -23,12 +23,14 @@ public class MassageHandler {
         }
         if (massage.contains("骚话")) {
             chain.text(Jx3Handler.getSaohua());
-        } else if (massage.contains("色图")) {
-
-            chain.image(SeTuHandler.getData()) ;
+        } else if (massage.contains("好康的")||massage.contains("色图")) {
+            chain.text("lsp慢点冲")
+            .image(SeTuHandler.getData()) ;
 
         } else if (massage.contains("舔狗")) {
             chain.text(Jx3Handler.getTianGou());
+        } else if (massage.contains("日常")) {
+            chain.text(Jx3Handler.getRiChang());
         }else {
             String re = ChatHandler.getChat(massage);
             log.info("返回的消息"+re);
