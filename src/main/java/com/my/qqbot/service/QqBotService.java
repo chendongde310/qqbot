@@ -1,25 +1,16 @@
 package com.my.qqbot.service;
 
-import com.google.gson.Gson;
-import com.my.qqbot.handler.MassageHandler;
 import com.zhuangxv.bot.annotation.FriendMessageHandler;
 import com.zhuangxv.bot.annotation.GroupMessageHandler;
 import com.zhuangxv.bot.contact.support.Group;
 import com.zhuangxv.bot.contact.support.Member;
 import com.zhuangxv.bot.contact.support.TempFriend;
 import com.zhuangxv.bot.event.message.GroupMessageEvent;
-import com.zhuangxv.bot.event.message.MessageEvent;
 import com.zhuangxv.bot.message.MessageChain;
-import com.zhuangxv.bot.message.support.ImageMessage;
-import com.zhuangxv.bot.message.support.ReplyMessage;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @author qiaoxingfu
@@ -68,18 +59,10 @@ public class QqBotService {
      * @FriendMessageHandler 监听私聊
      */
     @FriendMessageHandler( )
-    public MessageChain listenFriendMsgDemo(String content, int id,TempFriend friend) {
+    public void listenFriendMsgDemo(String content, int id,TempFriend friend) {
         log.info("收到私聊消息 消息={}", content);
 
-        try {
-            return MassageHandler.getData(content);
-        } catch (IOException e) {
-            e.printStackTrace();
-         //智能聊天机器人吧
-            return null;
-        }
     }
-
 
 
 
@@ -89,38 +72,18 @@ public class QqBotService {
 //     *
 //     * @GroupMessageHandler 监听群消息
 //     */
-//    @GroupMessageHandler( isAt = true)
+//    @GroupMessageHandler( regex = ".*狗子.*")
 //    public MessageChain listenGroupMsg(Group group, GroupMessageEvent event, Member member, int id, String content) {
 //        log.info("收到群消息 消息={},event={}", content, event.getMessage());
 //
 //        try {
 //            return MassageHandler.getData(content,member.getUserId());
 //        } catch (IOException e) {
-//            e.printStackTrace();
-//            return null;
+//            MessageChain chain = new MessageChain();
+//            chain.text("窝豁，请求失败了,等会儿在试试吧").at(member.getUserId());
+//            return chain;
 //        }
 //    }
-
-
-
-
-    /**
-     * 加上注解能监听到消息
-     *
-     * @GroupMessageHandler 监听群消息
-     */
-    @GroupMessageHandler( regex = ".*狗子.*")
-    public MessageChain listenGroupMsg(Group group, GroupMessageEvent event, Member member, int id, String content) {
-        log.info("收到群消息 消息={},event={}", content, event.getMessage());
-
-        try {
-            return MassageHandler.getData(content,member.getUserId());
-        } catch (IOException e) {
-            MessageChain chain = new MessageChain();
-            chain.text("窝豁，请求失败了,等会儿在试试吧").at(member.getUserId());
-            return chain;
-        }
-    }
 
 
 
