@@ -1,9 +1,6 @@
 package com.my.qqbot;
 
-import com.alibaba.fastjson.JSONObject;
 import com.my.qqbot.handler.MessageHandler;
-import com.my.qqbot.service.API;
-import com.my.qqbot.service.AuthService;
 import com.zhuangxv.bot.EnableBot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,30 +12,30 @@ import java.util.Scanner;
 @SpringBootApplication
 public class QqbotApplication {
 
-    public static void main(String[] args)   {
-      //  SpringApplication.run(QqbotApplication.class, args);
-       // API.assess_token = AuthService.getAuth();
+    private static final boolean IS_DEBUG = false;
 
 
-        Scanner scan = new Scanner(System.in);
-        // 判断是否还有输入
-        while (scan.hasNextLine()) {
-            String str2 = scan.nextLine();
+    public static void main(String[] args) {
 
-            try {
-                MessageHandler.getHandler().Base_Chat(str2);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (IS_DEBUG) {
+            Scanner scan = new Scanner(System.in);
+            // 判断是否还有输入
+            while (scan.hasNextLine()) {
+                String str2 = scan.nextLine();
+
+                try {
+                    MessageHandler.getHandler().TX_Chat(str2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
             }
-
-
+            scan.close();
+        } else {
+            SpringApplication.run(QqbotApplication.class, args);
         }
-        scan.close();
 
-
-//        JSONObject object =  JSONObject.parseObject("{\"event_name\":\"EXEC\",\"func\":\"getFoodOutList\"}");
-//
-//        System.out.println(  object.getString("func"));
 
     }
 

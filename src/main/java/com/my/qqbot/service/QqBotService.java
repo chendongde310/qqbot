@@ -1,12 +1,7 @@
 package com.my.qqbot.service;
 
+import com.my.qqbot.handler.MessageHandler;
 import com.zhuangxv.bot.annotation.FriendMessageHandler;
-import com.zhuangxv.bot.annotation.GroupMessageHandler;
-import com.zhuangxv.bot.contact.support.Group;
-import com.zhuangxv.bot.contact.support.Member;
-import com.zhuangxv.bot.contact.support.TempFriend;
-import com.zhuangxv.bot.event.message.GroupMessageEvent;
-import com.zhuangxv.bot.message.MessageChain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -58,43 +53,26 @@ public class QqBotService {
     /**
      * @FriendMessageHandler 监听私聊
      */
-    @FriendMessageHandler( )
-    public void listenFriendMsgDemo(String content, int id,TempFriend friend) {
+    @FriendMessageHandler(senderId = Config.USER_ID)
+    public void listenFriendMsgDemo(String content) {
         log.info("收到私聊消息 消息={}", content);
-
+        try {
+            MessageHandler.getHandler().TakeMassage(content);
+        } catch (IOException e) {
+            MessageHandler.sendMaster("报告大王,前线出问题啦\n" + "query:" + content + "\n" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 
-
-//
 //    /**
-//     * 加上注解能监听到消息
-//     *
-//     * @GroupMessageHandler 监听群消息
+//     * @FriendMessageHandler 监听私聊
 //     */
-//    @GroupMessageHandler( regex = ".*狗子.*")
-//    public MessageChain listenGroupMsg(Group group, GroupMessageEvent event, Member member, int id, String content) {
-//        log.info("收到群消息 消息={},event={}", content, event.getMessage());
-//
-//        try {
-//            return MassageHandler.getData(content,member.getUserId());
-//        } catch (IOException e) {
-//            MessageChain chain = new MessageChain();
-//            chain.text("窝豁，请求失败了,等会儿在试试吧").at(member.getUserId());
-//            return chain;
-//        }
+//    @FriendMessageHandler(senderId = Config.MASTER_ID)
+//    public void listenFriendMsgMaster(String content) {
+//        log.info("收到管理员指令={}", content);
+//        //运行指令
 //    }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

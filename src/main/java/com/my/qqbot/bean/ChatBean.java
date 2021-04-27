@@ -1,8 +1,7 @@
 package com.my.qqbot.bean;
 
 import com.alibaba.fastjson.JSONObject;
-import com.my.qqbot.handler.SkillHandler;
-import com.my.qqbot.service.API;
+import com.my.qqbot.service.Config;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,10 +10,11 @@ public class ChatBean {
 
 
     public ChatBean(String query, String intent, String session_id) {
-        this.log_id = API.USER_ID + System.currentTimeMillis();
+        this.log_id = String.valueOf(Config.USER_ID + System.currentTimeMillis());
         this.request = new Request(query);
 
         this.session_id = session_id;
+        if(!intent.isEmpty())
         dialog_state = new DialogState(intent);
     }
 
@@ -58,7 +58,7 @@ public class ChatBean {
         public List<String> SYS_REMEMBERED_SKILLS;
 
         public Contexts(String intent) {
-            SYS_REMEMBERED_SKILLS = Arrays.asList(SkillHandler.getSkillID(intent));
+//            SYS_REMEMBERED_SKILLS = Arrays.asList(SkillHandler.getSkillID(intent));
         }
     }
 
@@ -81,7 +81,7 @@ public class ChatBean {
         public Query_info query_info = new Query_info();
 
 
-        public String user_id = API.USER_ID;
+        public String user_id = String.valueOf(Config.USER_ID);
 
 
         public void setQuery(String query) {
