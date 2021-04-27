@@ -1,18 +1,15 @@
 package com.my.qqbot.handler;
 
-import com.my.qqbot.Task.BuyTeaTask;
-import com.my.qqbot.Task.RemindTask;
+import com.my.qqbot.task.BuyTeaTask;
+import com.my.qqbot.task.RemindTask;
 import com.my.qqbot.bean.TaskBean;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class TaskHandler {
 
 
-    //等待下达任务回合，默认三回合 澄清次数
-    public static int isWaitTask = 0;
+
 
 
     static TaskBean taskBean;
@@ -43,22 +40,20 @@ public class TaskHandler {
     public static void shotTask(String t, TaskBean bean) {
         title = t;
         taskBean = bean;
-        isWaitTask = 2 + taskBean.matchs.size();
-
-
+        MessageHandler.isWaitCount = 2 + taskBean.matchs.size();
     }
 
 
-    public static void mm(String content) {
+    public static void doit(String content) {
         String blank = matchWant(content);
         if (blank == null || blank.isEmpty()) {
             //执行任务
             //这里直接发给小陈
             MessageHandler.sendMaster(getContent());
             MessageHandler.sendTextMsg(taskBean.feedback.get(new Random().nextInt(taskBean.feedback.size())));
-            TaskHandler.isWaitTask = 0;
+            MessageHandler.isWaitCount = 0;
         } else {
-            TaskHandler.isWaitTask--;
+            MessageHandler.isWaitCount--;
             MessageHandler.sendTextMsg(blank);
         }
     }

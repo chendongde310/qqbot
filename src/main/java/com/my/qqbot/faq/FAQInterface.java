@@ -1,22 +1,24 @@
-package com.my.qqbot.Task;
+package com.my.qqbot.faq;
 
-import com.my.qqbot.bean.TaskBean;
+import com.my.qqbot.bean.FAQBean;
+import com.my.qqbot.handler.FAQHandler;
+import com.my.qqbot.handler.MessageHandler;
 import com.my.qqbot.handler.TaskHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TaskInterface {
+public abstract class FAQInterface {
     List<String> KEY = new ArrayList<>();
-     TaskBean TASK = new TaskBean();
+    FAQBean FAQ = new FAQBean();
 
 
     //意图不明确，捕获了任务，开始挂载任务，等待匹配意图
     public void mount(String content) {
-        TaskHandler.shotTask(content,TASK);
+        FAQHandler.getAnswer(content, FAQ);
         //执行一遍匹配
-        if (TaskHandler.isWaitTask > 0) {
-            TaskHandler.mm(content);
+        if (MessageHandler.isWaitCount > 0) {
+            FAQHandler.doit(content);
         }
 
     }
@@ -38,6 +40,4 @@ public abstract class TaskInterface {
         }
         return isHaveKey;
     }
-
-
 }

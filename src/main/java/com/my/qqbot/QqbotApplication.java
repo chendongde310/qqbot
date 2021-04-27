@@ -1,6 +1,9 @@
 package com.my.qqbot;
 
+import com.my.qqbot.handler.ChatHandler;
 import com.my.qqbot.handler.MessageHandler;
+import com.my.qqbot.service.AuthService;
+import com.my.qqbot.service.Config;
 import com.zhuangxv.bot.EnableBot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,16 +27,15 @@ public class QqbotApplication {
                 String str2 = scan.nextLine();
 
                 try {
-                    MessageHandler.getHandler().TX_Chat(str2);
+                    ChatHandler.getHandler().Base_Chat(str2);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
             }
             scan.close();
         } else {
             SpringApplication.run(QqbotApplication.class, args);
+            Config.assess_token = AuthService.getAuth();
         }
 
 

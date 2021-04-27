@@ -1,4 +1,4 @@
-package com.my.qqbot.Task;
+package com.my.qqbot.task;
 
 
 import com.my.qqbot.bean.TaskBean;

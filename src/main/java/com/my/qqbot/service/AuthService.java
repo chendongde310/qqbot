@@ -70,7 +70,7 @@ public class AuthService {
             /**
              * 返回结果示例
              */
-            System.err.println("result:" + result);
+          //  System.err.println("result:" + result);
             return JSONObject.parseObject(result).getString("access_token");
         } catch (Exception e) {
             System.err.printf("获取token失败！");

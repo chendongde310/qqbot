@@ -14,8 +14,8 @@ public class ChatBean {
         this.request = new Request(query);
 
         this.session_id = session_id;
-        if(!intent.isEmpty())
-        dialog_state = new DialogState(intent);
+//        if(!intent.isEmpty())
+//        dialog_state = new DialogState(intent);
     }
 
     public ChatBean(String query) {
@@ -30,7 +30,7 @@ public class ChatBean {
 
     public String session_id = "";
 
-    public String service_id = "S51100";
+    public String service_id = "S51210";
 
     public String log_id;
 
