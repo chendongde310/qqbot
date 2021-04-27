@@ -83,6 +83,10 @@ public class MessageHandler {
     }
 
 
+
+
+
+
     public static void sendTextMsg(String content) {
         TempFriend friend = new TempFriend(Config.USER_ID);
         MessageChain chain = new MessageChain();
