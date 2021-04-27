@@ -11,25 +11,20 @@ public class DataHandler {
 
 
     public static void getTianqi(List<FAQBean.Match> matchs) {
-
-
+        System.out.println("获取天气");
+        OkHttpClient client =  new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://api.vvhan.com/api/weather?city=济南&type=week")
                 .get()
                 .build();
 
-        new OkHttpClient().newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //处理之后返回给客户
-
-            }
-        });
+        try {
+         Response   response = client.newCall(request).execute();
+            //处理之后返回给客户
+            MessageHandler.sendTextMsg(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

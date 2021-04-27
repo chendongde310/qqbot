@@ -3,7 +3,6 @@ package com.my.qqbot.faq;
 import com.my.qqbot.bean.FAQBean;
 import com.my.qqbot.handler.FAQHandler;
 import com.my.qqbot.handler.MessageHandler;
-import com.my.qqbot.handler.TaskHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public abstract class FAQInterface {
     public void mount(String content) {
         FAQHandler.getAnswer(content, FAQ);
         //执行一遍匹配
-        if (MessageHandler.isWaitCount > 0) {
+        if (MessageHandler.isWaitFAQCount > 0) {
             FAQHandler.doit(content);
         }
 

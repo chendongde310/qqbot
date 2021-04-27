@@ -40,7 +40,7 @@ public class TaskHandler {
     public static void shotTask(String t, TaskBean bean) {
         title = t;
         taskBean = bean;
-        MessageHandler.isWaitCount = 2 + taskBean.matchs.size();
+        MessageHandler.isWaitTaskCount = 2 + taskBean.matchs.size();
     }
 
 
@@ -51,9 +51,9 @@ public class TaskHandler {
             //这里直接发给小陈
             MessageHandler.sendMaster(getContent());
             MessageHandler.sendTextMsg(taskBean.feedback.get(new Random().nextInt(taskBean.feedback.size())));
-            MessageHandler.isWaitCount = 0;
+            MessageHandler.isWaitTaskCount = 0;
         } else {
-            MessageHandler.isWaitCount--;
+            MessageHandler.isWaitTaskCount--;
             MessageHandler.sendTextMsg(blank);
         }
     }

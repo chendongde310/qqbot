@@ -2,10 +2,8 @@ package com.my.qqbot.handler;
 
 
 import com.my.qqbot.bean.FAQBean;
-import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.enums.FAQType;
 import com.my.qqbot.faq.WeatherFAQ;
-import com.my.qqbot.task.RemindTask;
 
 import java.util.Random;
 
@@ -21,15 +19,9 @@ public class FAQHandler {
     //问题捕获
     public static boolean messageCatch(String content) {
         if (WeatherFAQ.getInstance().isWant(content)) {
-            System.out.println("匹配买奶茶");
+            System.out.println("匹配查天气");
             return true;
         }
-        if (RemindTask.getInstance().isWant(content)) {
-            System.out.println("匹配提醒");
-            return true;
-        }
-
-
         return false;
 
 
@@ -59,24 +51,25 @@ public class FAQHandler {
     public static void getAnswer(String s, FAQBean faq) {
         content = s;
         faqBean = faq;
-        MessageHandler.isWaitCount = 2 + faq.matchs.size();
+        MessageHandler.isWaitFAQCount = 2 + faq.matchs.size();
     }
 
     public static void doit(String content) {
         String blank = matchWant(content);
         if (blank == null || blank.isEmpty()) {
             //请求接口回答问题
+            System.out.println("请求接口回答问题" + faqBean.type.name());
             getData(faqBean.type);
-
-            MessageHandler.isWaitCount = 0;
+            MessageHandler.sendMaster("狗子正在跑去气象局查询，请稍等！");
+            MessageHandler.isWaitFAQCount = 0;
         } else {
-            MessageHandler.isWaitCount--;
+            MessageHandler.isWaitFAQCount--;
             MessageHandler.sendTextMsg(blank);
         }
     }
 
     private static void getData(FAQType type) {
-        if(FAQType.KuaiDi == type){
+        if (type == FAQType.TianQI) {
             DataHandler.getTianqi(faqBean.matchs);
         }
     }

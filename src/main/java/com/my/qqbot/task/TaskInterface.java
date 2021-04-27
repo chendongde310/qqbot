@@ -16,7 +16,7 @@ public abstract class TaskInterface {
     public void mount(String content) {
         TaskHandler.shotTask(content, TASK);
         //执行一遍匹配
-        if (MessageHandler.isWaitCount > 0) {
+        if (MessageHandler.isWaitTaskCount > 0) {
             TaskHandler.doit(content);
         }
 

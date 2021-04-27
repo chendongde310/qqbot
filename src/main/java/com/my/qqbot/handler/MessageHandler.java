@@ -3,7 +3,6 @@ package com.my.qqbot.handler;
 import com.my.qqbot.service.Config;
 import com.zhuangxv.bot.contact.support.TempFriend;
 import com.zhuangxv.bot.message.MessageChain;
-import okhttp3.*;
 
 import java.io.IOException;
 
@@ -18,7 +17,8 @@ public class MessageHandler {
 
     private static MessageHandler handler;
     //等待下达任务回合，默认三回合 澄清次数
-    public static int isWaitCount = 0;
+    public static int isWaitTaskCount = 0;
+    public static int isWaitFAQCount = 0;
 
     private MessageHandler() {
     }
@@ -28,12 +28,17 @@ public class MessageHandler {
 
     //收到客户的消息
     public void TakeMassage(String content) throws IOException {
-        System.out.println("isWaitTask" + isWaitCount);
-        //判断当前是否有意图
-        if (isWaitCount > 0) {
+        //判断当前是否有需要澄清任务
+        if (isWaitTaskCount > 0) {
             TaskHandler.doit(content);
             return;
         }
+        //判断当前是否有需要澄清问答
+        if (isWaitFAQCount > 0) {
+            FAQHandler.doit(content);
+            return;
+        }
+
         //判断当前有无任务匹配
         if (TaskHandler.taskCatch(content)) {
             return;
