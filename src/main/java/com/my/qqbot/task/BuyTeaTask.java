@@ -2,6 +2,7 @@ package com.my.qqbot.task;
 
 
 import com.my.qqbot.bean.TaskBean;
+import com.my.qqbot.enums.TaskType;
 
 import java.util.Arrays;
 
@@ -19,6 +20,10 @@ public class BuyTeaTask extends TaskInterface {
 
 
     public BuyTeaTask() {
+
+        // TASK.type = TaskType.ButTea;
+        TASK.type = TaskType.Master;
+
         KEY.add("买杯奶茶");
         KEY.add("来杯奶茶");
         KEY.add("买杯咖啡");
@@ -26,8 +31,8 @@ public class BuyTeaTask extends TaskInterface {
 
         TASK.feedback = Arrays.asList("已经安排上啦！狗子这就去办！", "正在下单，稍后会通知你进度");
 
-
         TaskBean.Match bean1 = new TaskBean.Match();
+        bean1.title = "买啥";
         bean1.blank = Arrays.asList("想要喝什么呢[麻烦🐰尽量告诉我全面一点啦，例：一点点奶绿去冰加芋圆]",
                 "告诉我想要喝啥吧！[例：芋泥啵啵小杯去冰]",
                 "告诉我想要喝什么吧！[例：茶百道杨枝甘露大杯冰]",

@@ -1,5 +1,7 @@
 package com.my.qqbot.bean;
 
+import com.my.qqbot.enums.TaskType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +12,12 @@ public class TaskBean {
 
     public  List<String> feedback = new ArrayList<>();
 
-
+    public TaskType type;
 
 
     public static class Match{
 
+        public String title;
 
         //等待用户填入的内容，内容要匹配match
         public String content;
@@ -25,6 +28,13 @@ public class TaskBean {
         public List<String> match = new ArrayList<>();
 
 
+        public Match(String t, String c) {
+            content= c;
+            title =t;
+        }
+
+        public Match( ) {
+        }
     }
 
 

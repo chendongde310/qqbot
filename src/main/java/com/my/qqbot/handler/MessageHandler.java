@@ -1,5 +1,6 @@
 package com.my.qqbot.handler;
 
+import com.my.qqbot.QqbotApplication;
 import com.my.qqbot.service.Config;
 import com.zhuangxv.bot.contact.support.TempFriend;
 import com.zhuangxv.bot.message.MessageChain;
@@ -18,7 +19,6 @@ public class MessageHandler {
     private static MessageHandler handler;
     //等待下达任务回合，默认三回合 澄清次数
     public static int isWaitTaskCount = 0;
-    public static int isWaitFAQCount = 0;
 
     private MessageHandler() {
     }
@@ -30,24 +30,16 @@ public class MessageHandler {
     public void TakeMassage(String content) throws IOException {
         //判断当前是否有需要澄清任务
         if (isWaitTaskCount > 0) {
-            TaskHandler.doit(content);
+            TaskHandler.pollIntent(content);
             return;
         }
-        //判断当前是否有需要澄清问答
-        if (isWaitFAQCount > 0) {
-            FAQHandler.doit(content);
-            return;
-        }
+
 
         //判断当前有无任务匹配
         if (TaskHandler.taskCatch(content)) {
             return;
         }
 
-        //判断当前是否触发问题
-        if (FAQHandler.messageCatch(content)) {
-            return;
-        }
 
         System.out.println("进入闲聊");
         ChatHandler.getHandler().Base_Chat(content);
@@ -56,10 +48,14 @@ public class MessageHandler {
 
 
     public static void sendTextMsg(String content) {
-        TempFriend friend = new TempFriend(Config.USER_ID);
-        MessageChain chain = new MessageChain();
-        chain.text(content);
-        friend.sendMessage(chain);
+        if(QqbotApplication.IS_DEBUG){
+            System.out.println("发送客户消息:"+ content);
+        }else {
+            TempFriend friend = new TempFriend(Config.USER_ID);
+            MessageChain chain = new MessageChain();
+            chain.text(content);
+            friend.sendMessage(chain);
+        }
     }
 
     public static void sendImgMsg(String content) {
@@ -72,10 +68,14 @@ public class MessageHandler {
 
     //发送消息给Master
     public static void sendMaster(String msg) {
-        TempFriend friend = new TempFriend(Config.MASTER_ID);
-        MessageChain chain = new MessageChain();
-        chain.text("收到客户需求：" + msg);
-        friend.sendMessage(chain);
+        if(QqbotApplication.IS_DEBUG){
+            System.out.println("收到客户需求:"+ msg);
+        }else {
+            TempFriend friend = new TempFriend(Config.MASTER_ID);
+            MessageChain chain = new MessageChain();
+            chain.text("收到客户需求：" + msg);
+            friend.sendMessage(chain);
+        }
     }
 
 

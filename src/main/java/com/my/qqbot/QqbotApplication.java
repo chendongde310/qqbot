@@ -1,6 +1,9 @@
 package com.my.qqbot;
 
+import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.handler.ChatHandler;
+import com.my.qqbot.handler.DataHandler;
+import com.my.qqbot.handler.EQHandler;
 import com.my.qqbot.handler.MessageHandler;
 import com.my.qqbot.service.AuthService;
 import com.my.qqbot.service.Config;
@@ -15,7 +18,7 @@ import java.util.Scanner;
 @SpringBootApplication
 public class QqbotApplication {
 
-    private static final boolean IS_DEBUG = false;
+    public static final boolean IS_DEBUG = false;
 
 
     public static void main(String[] args) {
@@ -27,12 +30,23 @@ public class QqbotApplication {
                 String str2 = scan.nextLine();
 
                 try {
-                    ChatHandler.getHandler().Base_Chat(str2);
+                    MessageHandler.getHandler().TakeMassage(str2);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             scan.close();
+
+
+//            try {
+//                TaskBean bean  = new TaskBean();
+//                bean.matchs.add(new TaskBean.Match("时间","后天"));
+//                EQHandler.queryWeather(DataHandler.getWeather(),bean.matchs);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+
         } else {
             SpringApplication.run(QqbotApplication.class, args);
             Config.assess_token = AuthService.getAuth();

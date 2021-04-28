@@ -89,36 +89,7 @@ public class ChatHandler {
     }
 
 
-//    //没出任务，就跳闲聊
-//    public void TX_Chat(String content) throws IOException {
-//        TXChatBean bean = new TXChatBean(content);
-//        System.out.println(bean.toJsonString());
-//        RequestBody body = new FormBody.Builder()
-//                .add("app_id", String.valueOf(bean.app_id))
-//                .add("time_stamp", String.valueOf(bean.time_stamp))
-//                .add("nonce_str", bean.nonce_str)
-//                .add("session", bean.session)
-//                .add("question", bean.question)
-//                .add("sign", bean.sign)
-//                .build();
-//
-//        Request request = new Request.Builder()
-//                .url(Config.TX_Chat_URL)
-//                .header("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
-//                .post(body)
-//                .build();
-//        Response response = client.newCall(request).execute();
-//        TXChatResponse txChatResponse = JSONObject.parseObject(response.body().string(), TXChatResponse.class);
-//
-//
-//        if (txChatResponse.ret == 0) {
-//            MessageHandler.sendTextMsg(txChatResponse.data.answer);
-//        } else {
-//            //请求错误了，报告给小陈一下
-//            MessageHandler.sendMaster("报告大王,前线出问题啦\n" + "query:" + content + "\n" + txChatResponse.toJsonString());
-//        }
-//
-//    }
+
 
 
 }

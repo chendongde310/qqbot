@@ -1,7 +1,6 @@
 package com.my.qqbot.task;
 
 import com.my.qqbot.bean.TaskBean;
-import com.my.qqbot.handler.MessageHandler;
 import com.my.qqbot.handler.TaskHandler;
 
 import java.util.ArrayList;
@@ -12,15 +11,6 @@ public abstract class TaskInterface {
     TaskBean TASK = new TaskBean();
 
 
-    //意图不明确，捕获了任务，开始挂载任务，等待匹配意图
-    public void mount(String content) {
-        TaskHandler.shotTask(content, TASK);
-        //执行一遍匹配
-        if (MessageHandler.isWaitTaskCount > 0) {
-            TaskHandler.doit(content);
-        }
-
-    }
 
 
     //查询是否有这个意图
@@ -35,7 +25,8 @@ public abstract class TaskInterface {
         }
         //如果有意图就查询一遍先
         if (isHaveKey) {
-            mount(content);
+            //捕获了任务，开始挂载任务，等待匹配意图
+            TaskHandler.shotTask(content, TASK);
         }
         return isHaveKey;
     }
