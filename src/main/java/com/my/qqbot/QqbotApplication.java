@@ -5,6 +5,7 @@ import com.my.qqbot.handler.ChatHandler;
 import com.my.qqbot.handler.DataHandler;
 import com.my.qqbot.handler.EQHandler;
 import com.my.qqbot.handler.MessageHandler;
+import com.my.qqbot.push.TimerManager;
 import com.my.qqbot.service.AuthService;
 import com.my.qqbot.service.Config;
 import com.zhuangxv.bot.EnableBot;
@@ -50,6 +51,7 @@ public class QqbotApplication {
         } else {
             SpringApplication.run(QqbotApplication.class, args);
             Config.assess_token = AuthService.getAuth();
+            TimerManager.init();
         }
 
 
