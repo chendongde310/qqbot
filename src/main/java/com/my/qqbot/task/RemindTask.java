@@ -45,7 +45,7 @@ public class RemindTask extends TaskInterface {
         bean1.title = "提醒时间";
         bean1.blank = Arrays.asList("想要我提醒你什么！[例：明天下午两点去吃烤肉]",
                 "告诉我提醒的内容吧！[例：明天下午两点去吃烤肉]");
-        bean1.match = Arrays.asList("今天", "明天", "后天", "下午", "上午", "中午", "晚上", "凌晨", "点");
+        bean1.match = Arrays.asList("今", "明", "早", "晚",  "后天", "下午", "上午", "中午", "凌晨", "点");
         TASK.matchs.add(bean1);
     }
 
@@ -107,14 +107,14 @@ public class RemindTask extends TaskInterface {
         }
 
 
-        if (content.contains("下午")) {
+        if (content.contains("下午")||content.contains("晚")) {
             hour = hour + 12;
         }
 
-        if (content.contains("明天")) {
+        if (content.contains("明")) {
             day = 1;
         }
-        if (content.contains("后天")) {
+        if (content.contains("后")) {
             day = 2;
         }
 
