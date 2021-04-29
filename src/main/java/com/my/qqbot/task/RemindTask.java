@@ -70,7 +70,7 @@ public class RemindTask extends TaskInterface {
         content = content.replaceAll("六十", "60").replaceAll("五十", "50").replaceAll("四十", "40").replaceAll("三十", "30").replaceAll("二十", "20")
                 .replaceAll("一", "1").replaceAll("二", "2").replaceAll("两", "2").replaceAll("三", "3").replaceAll("四", "4")
                 .replaceAll("五", "5").replaceAll("六", "6").replaceAll("七", "7").replaceAll("八", "8").replaceAll("九", "9")
-                .replaceAll("十点", "10点").replaceAll("十", "1");;
+                .replaceAll("十点", "10点").replaceAll("十", "1").replaceAll("\\.", "点");;
         int indexEnd = content.indexOf("点");
         int indexStart = indexEnd;
         for (int i = 0; i < 4; i++) {
