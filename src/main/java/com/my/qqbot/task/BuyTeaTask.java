@@ -3,6 +3,7 @@ package com.my.qqbot.task;
 
 import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.enums.TaskType;
+import com.my.qqbot.handler.SwitchHandler;
 
 import java.util.Arrays;
 
@@ -19,17 +20,22 @@ public class BuyTeaTask extends TaskInterface {
     }
 
 
-    public BuyTeaTask() {
+    @Override
+    boolean baseSwitch() {
+        return SwitchHandler.BuyTea_Base;
+    }
 
-        // TASK.type = TaskType.ButTea;
-        TASK.type = TaskType.Master;
+
+    @Override
+    protected void initTaskData() {
+        TASK.type = TaskType.ButTea;
 
         KEY.add("买杯奶茶");
         KEY.add("来杯奶茶");
         KEY.add("买杯咖啡");
 
 
-        TASK.feedback = Arrays.asList("已经安排上啦！狗子这就去办！", "正在下单，稍后会通知你进度");
+        TASK.feedbackStart = Arrays.asList("已经安排上啦！狗子这就去办！", "正在下单，稍后会通知你进度");
 
         TaskBean.Match bean1 = new TaskBean.Match();
         bean1.title = "买啥";
@@ -40,8 +46,6 @@ public class BuyTeaTask extends TaskInterface {
         bean1.match = Arrays.asList("大杯", "中杯", "小杯");
 
         TASK.matchs.add(bean1);
-
-
     }
 
 

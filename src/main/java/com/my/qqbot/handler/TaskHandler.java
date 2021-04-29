@@ -2,9 +2,7 @@ package com.my.qqbot.handler;
 
 import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.enums.TaskType;
-import com.my.qqbot.task.BuyTeaTask;
-import com.my.qqbot.task.RemindTask;
-import com.my.qqbot.task.WeatherTask;
+import com.my.qqbot.task.*;
 
 import java.io.IOException;
 import java.util.Random;
@@ -18,6 +16,42 @@ public class TaskHandler {
     static TaskBean taskBean;
     static String title;
 
+
+    //任务捕获
+    public static boolean taskCatch(String content) {
+        if (WeatherTask.getInstance().isWant(content)) {
+            System.out.println("匹配查天气");
+            return true;
+        }
+
+        if (RemindTask.getInstance().isWant(content)) {
+            System.out.println("匹配提醒");
+            return true;
+        }
+        if (ExpressQueryTask.getInstance().isWant(content)) {
+            System.out.println("匹配查快递");
+            return true;
+        }
+        if (ExpressPushTask.getInstance().isWant(content)) {
+            System.out.println("匹配寄快递");
+            return true;
+        }
+        if (BuyTeaTask.getInstance().isWant(content)) {
+            System.out.println("匹配买奶茶");
+            return true;
+        }
+        if (EatWhatTask.getInstance().isWant(content)) {
+            System.out.println("匹配吃啥");
+            return true;
+        }
+
+
+        return false;
+
+
+    }
+
+
     //匹配合适的参数
     public static String matchWant(String content) {
         for (TaskBean.Match bean : taskBean.matchs) {
@@ -28,6 +62,9 @@ public class TaskHandler {
                     bean.content = content;
                     flag = true;
                     break;
+                }
+                if (bean.content != null && !bean.content.isEmpty()) {
+                    flag = true;
                 }
             }
             if (!flag) {
@@ -55,12 +92,18 @@ public class TaskHandler {
     public static void pollIntent(String content) {
         String blank = matchWant(content);
         if (blank == null || blank.isEmpty()) {
-            //执行任务前的逼逼
-            if (taskBean.feedback.size() > 0)
-                MessageHandler.sendTextMsg(taskBean.feedback.get(new Random().nextInt(taskBean.feedback.size())));
+
             //执行任务
             try {
+                //执行任务前的逼逼
+                if (taskBean.feedbackStart.size() > 0)
+                    MessageHandler.sendTextMsg(taskBean.feedbackStart.get(new Random().nextInt(taskBean.feedbackStart.size())));
+
                 doTask(taskBean.type);
+                //执行任务后的逼逼
+                if (taskBean.feedbackEnd.size() > 0)
+                    MessageHandler.sendTextMsg(taskBean.feedbackEnd.get(new Random().nextInt(taskBean.feedbackEnd.size())));
+
             } catch (IOException e) {
                 e.printStackTrace();
                 //处理异常
@@ -83,29 +126,6 @@ public class TaskHandler {
     }
 
 
-    //任务捕获
-    public static boolean taskCatch(String content) {
-        if (WeatherTask.getInstance().isWant(content)) {
-            System.out.println("匹配查天气");
-            return true;
-        }
-
-        if (BuyTeaTask.getInstance().isWant(content)) {
-            System.out.println("匹配买奶茶");
-            return true;
-        }
-        if (RemindTask.getInstance().isWant(content)) {
-            System.out.println("匹配提醒");
-            return true;
-        }
-
-
-        return false;
-
-
-    }
-
-
     //执行任务
     private static void doTask(TaskType type) throws IOException {
         switch (type) {
@@ -113,10 +133,20 @@ public class TaskHandler {
                 //TODO - 功能未添加
                 break;
             case Weather: //查天气
-                EQHandler.queryWeather(DataHandler.getWeather(), taskBean.matchs);
+                WeatherTask.getInstance().queryWeather(taskBean.matchs);
                 break;
             case Remind: //添加提醒
+                 RemindTask.getInstance().addRemind(taskBean.matchs);
+                break;
+            case ExpressQuery: //查快递
+                ExpressQueryTask.getInstance().queryExpressQuery(taskBean.matchs);
+                break;
+            case ExpressPush: //寄快递
                 //TODO - 功能未添加
+                break;
+            case EatWhat:
+                EatWhatTask.getInstance().queryFoods();
+
                 break;
             case Master:
             default:

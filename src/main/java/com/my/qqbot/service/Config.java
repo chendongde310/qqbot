@@ -3,6 +3,10 @@ package com.my.qqbot.service;
 public class Config {
     //public static final String USER_ID = "3432280575";
     public static final long USER_ID = 1279262533;
+    public static final String phone  = "17383012360";
+
+
+
 
     //百度聊天引擎
     public final static String Chat_URL = "https://aip.baidubce.com/rpc/2.0/unit/service/chat?access_token=";
@@ -14,4 +18,9 @@ public class Config {
 
 
     public static final long MASTER_ID = 1279262533;
+
+
+
+
+
 }

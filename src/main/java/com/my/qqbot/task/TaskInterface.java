@@ -10,12 +10,16 @@ public abstract class TaskInterface {
     List<String> KEY = new ArrayList<>();
     TaskBean TASK = new TaskBean();
 
+    List<TaskBean.Match> MATCH = new ArrayList<>();
 
+    abstract boolean baseSwitch();
 
 
     //查询是否有这个意图
     public boolean isWant(String content) {
-
+        if (!baseSwitch()) {
+            return false;
+        }
         boolean isHaveKey = false;
         for (String s : KEY) {
             if (content.contains(s)) {
@@ -30,6 +34,14 @@ public abstract class TaskInterface {
         }
         return isHaveKey;
     }
+
+
+    public TaskInterface() {
+        initTaskData();
+        MATCH.addAll(TASK.matchs);
+    }
+
+    protected abstract void initTaskData();
 
 
 }

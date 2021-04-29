@@ -3,7 +3,6 @@ package com.my.qqbot;
 import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.handler.ChatHandler;
 import com.my.qqbot.handler.DataHandler;
-import com.my.qqbot.handler.EQHandler;
 import com.my.qqbot.handler.MessageHandler;
 import com.my.qqbot.push.TimerManager;
 import com.my.qqbot.service.AuthService;
@@ -19,7 +18,8 @@ import java.util.Scanner;
 @SpringBootApplication
 public class QqbotApplication {
 
-    public static final boolean IS_DEBUG = false;
+    public static final boolean IS_DEBUG = true;
+//    public static final boolean IS_DEBUG = false;
 
 
     public static void main(String[] args) {

@@ -10,12 +10,16 @@ public class TaskBean {
     public List<Match> matchs = new ArrayList<>();
 
 
-    public  List<String> feedback = new ArrayList<>();
+    public  List<String> feedbackStart = new ArrayList<>();
+    public  List<String> feedbackEnd = new ArrayList<>();
 
     public TaskType type;
 
 
+    //意图，澄清一下
     public static class Match{
+
+        public String defaultValue;
 
         public String title;
 

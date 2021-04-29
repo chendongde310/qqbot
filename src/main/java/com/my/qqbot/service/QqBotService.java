@@ -3,8 +3,13 @@ package com.my.qqbot.service;
 import com.my.qqbot.handler.MessageHandler;
 import com.zhuangxv.bot.annotation.FriendMessageHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.util.RequestUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -73,6 +78,9 @@ public class QqBotService {
 //        log.info("收到管理员指令={}", content);
 //        //运行指令
 //    }
+
+
+
 
 
 }

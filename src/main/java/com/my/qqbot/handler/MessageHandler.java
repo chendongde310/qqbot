@@ -48,9 +48,14 @@ public class MessageHandler {
 
 
     public static void sendTextMsg(String content) {
+        if(content==null||content.isEmpty()){
+            return;
+        }
+      //  System.out.println("IS_DEBUG:"+ QqbotApplication.IS_DEBUG);
         if(QqbotApplication.IS_DEBUG){
             System.out.println("发送客户消息:"+ content);
         }else {
+
             TempFriend friend = new TempFriend(Config.USER_ID);
             MessageChain chain = new MessageChain();
             chain.text(content);
@@ -59,6 +64,9 @@ public class MessageHandler {
     }
 
     public static void sendImgMsg(String content) {
+        if(content==null||content.isEmpty()){
+            return;
+        }
         TempFriend friend = new TempFriend(Config.USER_ID);
         MessageChain chain = new MessageChain();
         chain.image(content);
@@ -68,12 +76,15 @@ public class MessageHandler {
 
     //发送消息给Master
     public static void sendMaster(String msg) {
+        if(msg==null||msg.isEmpty()){
+            return;
+        }
         if(QqbotApplication.IS_DEBUG){
-            System.out.println("收到客户需求:"+ msg);
+            System.out.println("收到客户需求:\n"+ msg);
         }else {
             TempFriend friend = new TempFriend(Config.MASTER_ID);
             MessageChain chain = new MessageChain();
-            chain.text("收到客户需求：" + msg);
+            chain.text("收到客户需求：\n" + msg);
             friend.sendMessage(chain);
         }
     }

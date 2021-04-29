@@ -1,6 +1,7 @@
 package com.my.qqbot.push;
 
 import com.my.qqbot.handler.MessageHandler;
+import com.my.qqbot.util.DateUtil;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -25,23 +26,36 @@ public class TimerManager {
     }
 
 
-
+  private   static TimerManager timerManager;
 
     public  static  void  init(){
-        TimerManager timerManager = new TimerManager();
+        timerManager = new TimerManager();
         timerManager.addTimerTask(18, 23, new TimerTask() {
             @Override
             public void run() {
                 System.out.println("时间=" + new Date() + " 执行任务1"); // 1次
-                MessageHandler.sendTextMsg("你好呀");
+               // MessageHandler.sendTextMsg("你好呀");
             }
         }).addTimerTask(18, 24, new TimerTask() {
             @Override
             public void run() {
                 System.out.println("时间=" + new Date() + " 执行任务2"); // 1次
-                MessageHandler.sendTextMsg("晚上好哦");
+              //  MessageHandler.sendTextMsg("晚上好哦");
             }
         });
+    }
+
+
+    public static  void addTimer(Date date, String content){
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+               MessageHandler.sendTextMsg("提醒事件：" +content);
+            }
+        }, date.getTime() - new Date().getTime());
+
     }
 
 

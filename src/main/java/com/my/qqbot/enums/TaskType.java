@@ -4,9 +4,10 @@ public enum TaskType {
 
      Master,
      Weather,
-     KuaiDi,
      ButTea,
-     Remind
-
+     ExpressPush,
+     ExpressQuery,
+     Remind,
+     EatWhat,
 
 }
