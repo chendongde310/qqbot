@@ -4,6 +4,7 @@ import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.handler.TaskHandler;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public abstract class TaskInterface {
@@ -42,6 +43,5 @@ public abstract class TaskInterface {
     }
 
     protected abstract void initTaskData();
-
 
 }

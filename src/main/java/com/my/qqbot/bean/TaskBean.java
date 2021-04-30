@@ -17,6 +17,7 @@ public class TaskBean {
 
 
     //意图，澄清一下
+    //可以不添加意图直接触发任务
     public static class Match{
 
         public String defaultValue;

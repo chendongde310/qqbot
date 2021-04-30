@@ -51,7 +51,7 @@ public class MessageHandler {
         if(content==null||content.isEmpty()){
             return;
         }
-      //  System.out.println("IS_DEBUG:"+ QqbotApplication.IS_DEBUG);
+        System.out.println("IS_DEBUG:"+ QqbotApplication.IS_DEBUG);
         if(QqbotApplication.IS_DEBUG){
             System.out.println("发送客户消息:"+ content);
         }else {

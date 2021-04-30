@@ -98,7 +98,7 @@ public class TaskHandler {
                 //执行任务前的逼逼
                 if (taskBean.feedbackStart.size() > 0)
                     MessageHandler.sendTextMsg(taskBean.feedbackStart.get(new Random().nextInt(taskBean.feedbackStart.size())));
-
+                //执行任务
                 doTask(taskBean.type);
                 //执行任务后的逼逼
                 if (taskBean.feedbackEnd.size() > 0)

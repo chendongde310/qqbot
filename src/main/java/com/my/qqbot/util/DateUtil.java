@@ -286,6 +286,12 @@ public class DateUtil {
         return time.getTime();
     }
 
+    public  static String getStringDate(Date date){
+        // 指定格式化格式
+        SimpleDateFormat f = new SimpleDateFormat("MM月dd号的HH点mm分");
+        return f.format(date);
+    }
+
 
 }
 

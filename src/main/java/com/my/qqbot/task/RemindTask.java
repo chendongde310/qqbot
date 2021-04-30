@@ -3,6 +3,7 @@ package com.my.qqbot.task;
 
 import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.enums.TaskType;
+import com.my.qqbot.handler.MessageHandler;
 import com.my.qqbot.handler.SwitchHandler;
 import com.my.qqbot.push.TimerManager;
 import com.my.qqbot.util.DateUtil;
@@ -36,7 +37,7 @@ public class RemindTask extends TaskInterface {
         KEY.add("设置提醒");
         KEY.add("提醒我");
 
-        TASK.feedbackStart = Arrays.asList("设置成功，我会准时提醒你的", "已经记下啦，我会准时提醒你的！");
+        // TASK.feedbackStart = Arrays.asList("设置成功，我会准时提醒你的", "已经记下啦，我会准时提醒你的！");
 
         TASK.type = TaskType.Remind;
 
@@ -45,7 +46,7 @@ public class RemindTask extends TaskInterface {
         bean1.title = "提醒时间";
         bean1.blank = Arrays.asList("想要我提醒你什么！[例：明天下午两点去吃烤肉]",
                 "告诉我提醒的内容吧！[例：明天下午两点去吃烤肉]");
-        bean1.match = Arrays.asList("今", "明", "早", "晚",  "后天", "下午", "上午", "中午", "凌晨", "点");
+        bean1.match = Arrays.asList("今", "明", "早", "晚", "后天", "下午", "上午", "中午", "凌晨", "点");
         TASK.matchs.add(bean1);
     }
 
@@ -56,7 +57,7 @@ public class RemindTask extends TaskInterface {
             if ("提醒时间".equals(match.title)) {
                 Date date = getRealTime(match.content);
                 System.out.println(date.toString());
-                TimerManager.addTimer(date,match.content);
+                TimerManager.addTimer(date, match.content);
             }
         }
 
@@ -70,7 +71,8 @@ public class RemindTask extends TaskInterface {
         content = content.replaceAll("六十", "60").replaceAll("五十", "50").replaceAll("四十", "40").replaceAll("三十", "30").replaceAll("二十", "20")
                 .replaceAll("一", "1").replaceAll("二", "2").replaceAll("两", "2").replaceAll("三", "3").replaceAll("四", "4")
                 .replaceAll("五", "5").replaceAll("六", "6").replaceAll("七", "7").replaceAll("八", "8").replaceAll("九", "9")
-                .replaceAll("十点", "10点").replaceAll("十", "1").replaceAll("\\.", "点");;
+                .replaceAll("十点", "10点").replaceAll("十分", "10分").replaceAll("十", "1").replaceAll("\\.", "点");
+        ;
         int indexEnd = content.indexOf("点");
         int indexStart = indexEnd;
         for (int i = 0; i < 4; i++) {
@@ -103,11 +105,11 @@ public class RemindTask extends TaskInterface {
                     min = d;
                 }
             }
-            //System.out.println(min);
+            System.out.println("分钟" + min);
         }
 
 
-        if (content.contains("下午")||content.contains("晚")) {
+        if (content.contains("下午") || content.contains("晚")) {
             hour = hour + 12;
         }
 
@@ -119,8 +121,21 @@ public class RemindTask extends TaskInterface {
         }
 
 
-
-
         return DateUtil.getTime(day, hour, min);
     }
+
+
+    public void RemindUser(String content) {
+        MessageHandler.sendTextMsg("️❗❗❗️收到提醒❗❗❗\n\n" + content);
+
+
+    }
+
+
+    public void timeOverdue(Date date) {
+        //todo-看看要不要需要自动延后一天
+        MessageHandler.sendTextMsg("❗️❗️设置提醒失败❗️❗️" + DateUtil.getStringDate(date) + "已经过了，请重新设置吧！");
+    }
+
+
 }
