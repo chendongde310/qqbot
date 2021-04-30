@@ -3,10 +3,12 @@ package com.my.qqbot.handler;
 import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.enums.TaskType;
 import com.my.qqbot.task.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.Random;
 
+@Slf4j
 public class TaskHandler {
 
 //夜夜白白中中休休
@@ -44,7 +46,10 @@ public class TaskHandler {
             System.out.println("匹配吃啥");
             return true;
         }
-
+        if (ReserveTask.getInstance().isWant(content)) {
+            System.out.println("匹配预定事件");
+            return true;
+        }
 
         return false;
 
@@ -54,9 +59,13 @@ public class TaskHandler {
 
     //匹配合适的参数
     public static String matchWant(String content) {
+
+
         for (TaskBean.Match bean : taskBean.matchs) {
 
+
             boolean flag = false;
+
             for (String s : bean.match) {
                 if (content.contains(s)) {
                     bean.content = content;
@@ -67,6 +76,7 @@ public class TaskHandler {
                     flag = true;
                 }
             }
+
             if (!flag) {
                 Random rand = new Random();
                 return bean.blank.get(rand.nextInt(bean.blank.size()));
@@ -78,11 +88,18 @@ public class TaskHandler {
 
     //挂载任务
     public static void shotTask(String t, TaskBean bean) {
+        //要清空原任务的参数
+        for (TaskBean.Match match:bean.matchs) {
+            match.content = null;
+        }
+
+
         title = t;
         taskBean = bean;
         MessageHandler.isWaitTaskCount = 3 + taskBean.matchs.size();
+
         //执行一遍匹配 ,是否包含意图
-        System.out.println("执行一遍匹配 ,是否包含意图");
+        System.out.println("再执行一遍匹配 ,是否包含意图");
         pollIntent(t);
 
     }
@@ -109,8 +126,10 @@ public class TaskHandler {
                 //处理异常
             }
 
-
+            //复位
             MessageHandler.isWaitTaskCount = 0;
+            taskBean = null;
+            title = null;
         } else {
             MessageHandler.isWaitTaskCount--;
             MessageHandler.sendTextMsg(blank);
@@ -118,9 +137,9 @@ public class TaskHandler {
     }
 
     private static String getContent() {
-        StringBuilder stringBuffer = new StringBuilder(title).append(":");
+        StringBuilder stringBuffer = new StringBuilder(title).append("\n");
         for (TaskBean.Match bean : taskBean.matchs) {
-            stringBuffer.append(bean.content).append("\n");
+            stringBuffer.append(bean.title).append(":").append(bean.content).append("\n");
         }
         return stringBuffer.toString();
     }
@@ -129,26 +148,32 @@ public class TaskHandler {
     //执行任务
     private static void doTask(TaskType type) throws IOException {
         switch (type) {
+            case Reserve:
+                MessageHandler.sendMaster(getContent());
             case ButTea: //买外卖
                 //TODO - 功能未添加
+                MessageHandler.sendMaster(getContent());
                 break;
             case Weather: //查天气
                 WeatherTask.getInstance().queryWeather(taskBean.matchs);
                 break;
             case Remind: //添加提醒
-                 RemindTask.getInstance().addRemind(taskBean.matchs);
+                RemindTask.getInstance().addRemind(taskBean.matchs);
                 break;
             case ExpressQuery: //查快递
                 ExpressQueryTask.getInstance().queryExpressQuery(taskBean.matchs);
                 break;
             case ExpressPush: //寄快递
                 //TODO - 功能未添加
+                MessageHandler.sendMaster(getContent());
                 break;
             case EatWhat:
                 EatWhatTask.getInstance().queryFoods();
 
                 break;
             case Master:
+
+
             default:
                 MessageHandler.sendMaster(getContent());
         }

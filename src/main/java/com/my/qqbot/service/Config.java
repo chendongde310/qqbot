@@ -20,7 +20,5 @@ public class Config {
     public static final long MASTER_ID = 1279262533;
 
 
-
-
-
+    public static String name = "兔子";
 }

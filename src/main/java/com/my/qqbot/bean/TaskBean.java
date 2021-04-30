@@ -24,8 +24,8 @@ public class TaskBean {
 
         public String title;
 
-        //等待用户填入的内容，内容要匹配match
-        public String content;
+        //等待用户填入的内容，内容要匹配match ,记得清空
+        public String content  ;
         //没有匹配的内容的回复
         public List<String> blank;
 
@@ -33,10 +33,7 @@ public class TaskBean {
         public List<String> match = new ArrayList<>();
 
 
-        public Match(String t, String c) {
-            content= c;
-            title =t;
-        }
+
 
         public Match( ) {
         }

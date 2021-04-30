@@ -9,5 +9,7 @@ public enum TaskType {
      ExpressQuery,
      Remind,
      EatWhat,
+     Reserve,//预定
 
 }
+
