@@ -1,6 +1,7 @@
 package com.my.qqbot.task;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.my.qqbot.bean.ExpressBean;
 import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.enums.TaskType;
@@ -11,8 +12,7 @@ import com.my.qqbot.util.Pinyin4jUtil;
 import org.apache.commons.lang3.CharUtils;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 //查快递
 //查询快递后开始跟踪快递
@@ -100,16 +100,26 @@ public class ExpressQueryTask extends TaskInterface {
         if (data != null && data.size() > 0) {
             System.out.println("查询到快递信息" + data.get(0).context);
 
-            MessageHandler.sendTextMsg(getContentStr(data,com,nu));
+            MessageHandler.sendTextMsg(getContentStr(bean.showapi_res_body,false));
+            subscribeExpress(com,nu);
 
-
+        }else {
+            MessageHandler.sendTextMsg("(⑉･̆-･̆⑉)斯密嘛塞，狗子没有查到这个快件，要不你核对一下信息重新再试试？");
         }
 
 
     }
 
-    private String getContentStr(List<ExpressBean.Data> data, String com, String nu) {
-        StringBuilder builder = new StringBuilder(com+nu);
+    public String getContentStr(ExpressBean.Showapi_res_body bean, Boolean isSubscribe) {
+        List<ExpressBean.Data> data = bean.data;
+        StringBuilder builder = new StringBuilder();
+        if (isSubscribe){
+            builder.append("\uD83D\uDFE5新的快递信息变更\uD83D\uDFE5\n") .append(bean.expTextName).append(bean.mailNo).append("\n");
+        }else {
+            builder.append("\uD83D\uDFE5查询到快递信息\uD83D\uDFE5\n") .append(bean.expTextName).append(bean.mailNo).append("\n");
+
+        }
+
 
         builder.append("\n").append(data.get(0).time).append("\n").append(data.get(0).context);
 
@@ -125,5 +135,43 @@ public class ExpressQueryTask extends TaskInterface {
         return builder.toString();
     }
 
+    public    List<ExpressSubscribeBean> subscribe = new ArrayList();
+
+    /**
+     * 订阅
+     * @param com
+     * @param nu
+     */
+    public  void  subscribeExpress(String com, String nu) throws IOException {
+        subscribe.add(new ExpressSubscribeBean(com,nu));
+        DataHandler.subscribeExpressInfo(com, nu);
+    }
+
+
+    public   String getSubscribeListJson() {
+        return JSONObject.toJSONString(subscribe);
+    }
+
+
+
+
+
+
+    public static class ExpressSubscribeBean {
+        public String com;
+        public String nu;
+
+        public ExpressSubscribeBean(String com, String nu) {
+            this.com = com;
+            this.nu = nu;
+        }
+    }
+    @Override
+    protected String help() {
+        StringBuilder builder = new StringBuilder();
+
+
+        return builder.toString();
+    }
 
 }

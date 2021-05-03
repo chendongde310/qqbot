@@ -69,6 +69,7 @@ public class TaskHandler {
             for (String s : bean.match) {
                 if (content.contains(s)) {
                     bean.content = content;
+                    bean.hit = s;
                     flag = true;
                     break;
                 }
@@ -89,7 +90,7 @@ public class TaskHandler {
     //挂载任务
     public static void shotTask(String t, TaskBean bean) {
         //要清空原任务的参数
-        for (TaskBean.Match match:bean.matchs) {
+        for (TaskBean.Match match : bean.matchs) {
             match.content = null;
         }
 
@@ -148,6 +149,8 @@ public class TaskHandler {
     //执行任务
     private static void doTask(TaskType type) throws IOException {
         switch (type) {
+            case Help:
+                HelpTask.getInstance().showDetails(taskBean.matchs);
             case Reserve:
                 MessageHandler.sendMaster(getContent());
             case ButTea: //买外卖

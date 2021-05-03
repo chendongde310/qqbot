@@ -54,5 +54,11 @@ public class ExpressPushTask extends TaskInterface {
         TASK.feedbackStart = Arrays.asList("已经通知小哥啦，届时会让他联系你的！", "马上通知快递小哥让他联系你");
     }
 
+    @Override
+    protected String help() {
+        StringBuilder builder = new StringBuilder();
 
+
+        return builder.toString();
+    }
 }

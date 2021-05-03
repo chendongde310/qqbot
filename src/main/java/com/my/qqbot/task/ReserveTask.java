@@ -59,11 +59,11 @@ public class ReserveTask extends TaskInterface {
                 "需要我帮" + Config.name + "预定什么事请呢[例：预定一家离我最近的美甲店]");
 
         //这个匹配感觉不太好，想办法优化一下
-        bean2.match = Arrays.asList("预定", "店", "人", "厅", "找", "家", "去", "看", "院", "的", "门", "票", "吃", "饭", "请");
+        bean2.match = Arrays.asList("店", "人", "厅", "找", "家", "去", "看", "院", "的", "门", "票", "吃", "饭", "请", "玩","座");
 
-        TASK.matchs.add(bean2);
+
         TASK.matchs.add(bean1);
-
+        TASK.matchs.add(bean2);
 
         TASK.feedbackStart = Arrays.asList("", "收到预定请求，稍后会给你反馈结果");
     }
@@ -77,5 +77,14 @@ public class ReserveTask extends TaskInterface {
             }
         }
     }
+    @Override
+    protected String help() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("预定功能是一个非常全面的功能，例如\n[明天下午五点提醒我去吃烤肉]\n[设置提醒今天晚上八点半下单零食]\n[提醒我后天去医院体检]\n")
+                .append("我就会在指定的时间发消息提醒你哒，同时在APP配置了短信通知开关和语音电话通知模式，也可以去打开哦~\n")
+                .append("[技能触发关键词]:设置提醒/提醒我xxx").append("\n")
+                .append("[必须条件]:提醒时间").append("\n");
 
+        return builder.toString();
+    }
 }

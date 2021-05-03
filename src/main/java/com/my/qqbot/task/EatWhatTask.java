@@ -63,6 +63,12 @@ public class EatWhatTask extends TaskInterface {
 
 
     }
+    @Override
+    protected String help() {
+        StringBuilder builder = new StringBuilder();
 
+
+        return builder.toString();
+    }
 
 }

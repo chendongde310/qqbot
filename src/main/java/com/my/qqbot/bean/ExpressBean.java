@@ -16,11 +16,9 @@ public class ExpressBean {
     public Showapi_res_body showapi_res_body;
 
 
-
-
     public static class Showapi_res_body {
 
-//        public int queryTimes;
+        //        public int queryTimes;
 //
 //        public String upgrade_info;
 //
@@ -43,9 +41,11 @@ public class ExpressBean {
 //
 //        public String logo;
 //
-//        public String expTextName;
+        public String mailNo;
 
-        public List<Data> data ;
+        public String expTextName;
+
+        public List<Data> data;
 
 
     }
@@ -59,10 +59,6 @@ public class ExpressBean {
     }
 
 
-
-
-
-
     public static class ExpressRequestBody {
         public String com;
         public String nu;
@@ -72,7 +68,6 @@ public class ExpressBean {
         public String toJsonString() {
             return JSONObject.toJSONString(this);
         }
-
 
 
     }

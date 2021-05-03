@@ -79,4 +79,38 @@ public class DataHandler {
     }
 
 
+    /**
+     * 订阅快递
+     * @param com
+     * @param nu
+     * @return
+     * @throws IOException
+     */
+    public static ExpressBean subscribeExpressInfo(String com, String nu) throws IOException {
+
+        System.out.println("获取快递信息");
+        OkHttpClient client = new OkHttpClient();
+
+
+        StringBuilder builder = new StringBuilder("http://route.showapi.com/64-26?showapi_appid=619442&showapi_sign=5829a828f7fb4d44a892682f150b04b0&com=");
+        builder.append(com).append("&nu=").append(nu);
+        if (com.equals("shunfeng")) {
+            builder.append("&phone=").append(Config.phone.substring(Config.phone.length() - 4));
+        }
+        System.out.println(builder.toString());
+        Request request = new Request.Builder()
+                .url(builder.toString())
+                .get()
+                .build();
+
+        Response response = client.newCall(request).execute();
+        //处理之后返回给客户
+        ExpressBean expressBean = JSONObject.parseObject(response.body().string(), ExpressBean.class);
+
+        System.out.println(JSONObject.toJSONString(expressBean));
+        return expressBean;
+
+    }
+
+
 }

@@ -44,4 +44,6 @@ public abstract class TaskInterface {
 
     protected abstract void initTaskData();
 
+    protected abstract String help();
+
 }

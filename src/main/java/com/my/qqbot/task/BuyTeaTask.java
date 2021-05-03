@@ -48,5 +48,13 @@ public class BuyTeaTask extends TaskInterface {
         TASK.matchs.add(bean1);
     }
 
+    @Override
+    protected String help() {
+        StringBuilder builder = new StringBuilder();
+
+
+        return builder.toString();
+    }
+
 
 }

@@ -26,6 +26,10 @@ public class TaskBean {
 
         //等待用户填入的内容，内容要匹配match ,记得清空
         public String content  ;
+
+        //匹配上的match列表词
+        public String hit  ;
+
         //没有匹配的内容的回复
         public List<String> blank;
 

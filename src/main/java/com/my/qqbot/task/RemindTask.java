@@ -78,6 +78,14 @@ public class RemindTask extends TaskInterface {
         //todo-看看要不要需要自动延后一天
         MessageHandler.sendTextMsg("❗️❗️设置提醒失败❗️❗️" + DateUtil.getStringDate(date) + "已经过了，请重新设置吧！");
     }
-
+    @Override
+    protected String help() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("提醒功能可以通过指令告诉我在什么时候提醒你干什么事情，例如\n[明天下午五点提醒我去吃烤肉]\n[设置提醒今天晚上八点半下单零食]\n[提醒我后天去医院体检]\n")
+                .append("我就会在指定的时间发消息提醒你哒，同时在APP配置了短信通知开关和语音电话通知模式，也可以去打开哦~\n")
+        .append("[技能触发关键词]:设置提醒/提醒我xxx").append("\n")
+        .append("[必须条件]:提醒时间").append("\n");
+        return builder.toString();
+    }
 
 }

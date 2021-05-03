@@ -18,8 +18,8 @@ import java.util.Scanner;
 @SpringBootApplication
 public class QqbotApplication {
 
-    public static  boolean IS_DEBUG = true;
-//    public static   boolean IS_DEBUG = false;
+//    public static  boolean IS_DEBUG = true;
+    public static   boolean IS_DEBUG = false;
 
 
     public static void main(String[] args) {

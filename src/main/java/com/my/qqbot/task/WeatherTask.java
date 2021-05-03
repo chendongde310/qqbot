@@ -144,6 +144,12 @@ public class WeatherTask extends TaskInterface {
             MessageHandler.sendTextMsg(tips);
         }
     }
+    @Override
+    protected String help() {
+        StringBuilder builder = new StringBuilder();
 
+
+        return builder.toString();
+    }
 
 }
