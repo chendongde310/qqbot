@@ -2,6 +2,7 @@ package com.my.qqbot.task;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.my.qqbot.Config;
 import com.my.qqbot.bean.ExpressBean;
 import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.enums.TaskType;
@@ -93,6 +94,21 @@ public class ExpressQueryTask extends TaskInterface {
             }
         }
 
+
+        //判断是订阅还是只查询
+        if(Config.isSubscribe){
+            subscribeExpress(com,nu);
+        }else {
+            getExpressInfo(com,nu);
+        }
+
+
+
+    }
+
+
+
+    private void getExpressInfo(String com, String nu) throws IOException {
         ExpressBean bean = DataHandler.getExpressInfo(com, nu);
 
 
@@ -101,12 +117,11 @@ public class ExpressQueryTask extends TaskInterface {
             System.out.println("查询到快递信息" + data.get(0).context);
 
             MessageHandler.sendTextMsg(getContentStr(bean.showapi_res_body,false));
-            subscribeExpress(com,nu);
+
 
         }else {
             MessageHandler.sendTextMsg("(⑉･̆-･̆⑉)斯密嘛塞，狗子没有查到这个快件，要不你核对一下信息重新再试试？");
         }
-
 
     }
 

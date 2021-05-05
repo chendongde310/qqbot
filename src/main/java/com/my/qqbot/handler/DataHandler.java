@@ -1,9 +1,10 @@
 package com.my.qqbot.handler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.my.qqbot.Config;
 import com.my.qqbot.bean.ExpressBean;
 import com.my.qqbot.bean.WeatherBean;
-import com.my.qqbot.service.Config;
+import com.my.qqbot.service.ApiConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;

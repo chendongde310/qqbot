@@ -1,16 +1,15 @@
 package com.my.qqbot.bean;
 
 import com.alibaba.fastjson.JSONObject;
-import com.my.qqbot.service.Config;
+import com.my.qqbot.service.ApiConfig;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ChatBean {
 
 
     public ChatBean(String query, String intent, String session_id) {
-        this.log_id = String.valueOf(Config.USER_ID + System.currentTimeMillis());
+        this.log_id = String.valueOf(ApiConfig.USER_ID + System.currentTimeMillis());
         this.request = new Request(query);
 
         this.session_id = session_id;
@@ -81,7 +80,7 @@ public class ChatBean {
         public Query_info query_info = new Query_info();
 
 
-        public String user_id = String.valueOf(Config.USER_ID);
+        public String user_id = String.valueOf(ApiConfig.USER_ID);
 
 
         public void setQuery(String query) {

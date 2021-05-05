@@ -3,13 +3,8 @@ package com.my.qqbot.service;
 import com.my.qqbot.handler.MessageHandler;
 import com.zhuangxv.bot.annotation.FriendMessageHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.util.RequestUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -58,7 +53,7 @@ public class QqBotService {
     /**
      * @FriendMessageHandler 监听私聊
      */
-    @FriendMessageHandler(senderId = Config.USER_ID)
+    @FriendMessageHandler(senderId = ApiConfig.USER_ID)
     public void listenFriendMsgDemo(String content) {
         log.info("收到私聊消息 消息={}", content);
         try {

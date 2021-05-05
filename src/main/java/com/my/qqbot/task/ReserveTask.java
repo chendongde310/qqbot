@@ -1,10 +1,11 @@
 package com.my.qqbot.task;
 
 
+import com.my.qqbot.Config;
 import com.my.qqbot.bean.TaskBean;
 import com.my.qqbot.enums.TaskType;
 import com.my.qqbot.handler.SwitchHandler;
-import com.my.qqbot.service.Config;
+import com.my.qqbot.service.ApiConfig;
 import com.my.qqbot.util.DateUtil;
 
 import java.util.Arrays;

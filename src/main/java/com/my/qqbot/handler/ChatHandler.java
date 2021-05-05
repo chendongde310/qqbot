@@ -4,8 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.my.qqbot.bean.ChatBean;
 import com.my.qqbot.bean.ChatResponse;
 //import com.my.qqbot.bean.TXChatBean;
-import com.my.qqbot.bean.TXChatResponse;
-import com.my.qqbot.service.Config;
+import com.my.qqbot.service.ApiConfig;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class ChatHandler {
 
         RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"), bean.toJsonString());
         Request request = new Request.Builder()
-                .url(Config.Chat_URL + Config.assess_token)
+                .url(ApiConfig.Chat_URL + ApiConfig.assess_token)
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();

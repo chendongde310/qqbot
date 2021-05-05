@@ -1,7 +1,7 @@
 package com.my.qqbot.handler;
 
 import com.my.qqbot.QqbotApplication;
-import com.my.qqbot.service.Config;
+import com.my.qqbot.service.ApiConfig;
 import com.zhuangxv.bot.contact.support.TempFriend;
 import com.zhuangxv.bot.message.MessageChain;
 
@@ -56,7 +56,7 @@ public class MessageHandler {
             System.out.println("发送客户消息:"+ content);
         }else {
 
-            TempFriend friend = new TempFriend(Config.USER_ID);
+            TempFriend friend = new TempFriend(ApiConfig.USER_ID);
             MessageChain chain = new MessageChain();
             chain.text(content);
             friend.sendMessage(chain);
@@ -67,7 +67,7 @@ public class MessageHandler {
         if(content==null||content.isEmpty()){
             return;
         }
-        TempFriend friend = new TempFriend(Config.USER_ID);
+        TempFriend friend = new TempFriend(ApiConfig.USER_ID);
         MessageChain chain = new MessageChain();
         chain.image(content);
         friend.sendMessage(chain);
@@ -82,7 +82,7 @@ public class MessageHandler {
         if(QqbotApplication.IS_DEBUG){
             System.out.println("收到客户需求:\n"+ msg);
         }else {
-            TempFriend friend = new TempFriend(Config.MASTER_ID);
+            TempFriend friend = new TempFriend(ApiConfig.MASTER_ID);
             MessageChain chain = new MessageChain();
             chain.text("收到客户需求：\n" + msg);
             friend.sendMessage(chain);

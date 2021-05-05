@@ -9,6 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 
 //今天我吃啥
+
+/**
+ * 这个功能优化方向
+ *
+ * 将食物分类成不同种类【凉性】【平性】【温性】         【】
+ */
 public class EatWhatTask extends TaskInterface {
 
     private static EatWhatTask eatWhatTask;
@@ -51,7 +57,21 @@ public class EatWhatTask extends TaskInterface {
 
 
     //随机返回一个食物吧
+    //影响参数有很多 健康模式、生理模式
+
     public void queryFoods() {
+        //todo
+
+
+
+
+
+
+
+
+
+
+
         String food = foods.get((int) (Math.random() * foods.size()));
         List<String> strings = Arrays.asList("推荐你吃" + food,
                 "去吃" + food + "吧",

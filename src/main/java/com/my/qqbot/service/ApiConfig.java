@@ -1,9 +1,9 @@
 package com.my.qqbot.service;
 
-public class Config {
+public class ApiConfig {
     //public static final String USER_ID = "3432280575";
     public static final long USER_ID = 1279262533;
-    public static final String phone  = "17383012360";
+    public static final long MASTER_ID = 1279262533;
 
 
 
@@ -17,8 +17,5 @@ public class Config {
     public static final String APP_KEY = "GFbFBDSCaGEQ87ja";
 
 
-    public static final long MASTER_ID = 1279262533;
 
-
-    public static String name = "兔子";
 }
